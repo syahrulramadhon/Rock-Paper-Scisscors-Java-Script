@@ -1,8 +1,8 @@
-const display = document.querySelector("#display");
-const player = document.querySelector("#player");
-const winner = document.querySelector("#winner");
-const pS = document.querySelector("#player-score");
-const cS = document.querySelector("#computer-score");
+const computerResult = document.querySelector("#computer-result");
+const playerResult = document.querySelector("#player-result");
+const winnerResult = document.querySelector("#winner-result");
+const playerDisplayScore = document.querySelector("#player-display-score");
+const computerDisplayScore = document.querySelector("#computer-display-score");
 
 const choices = ["rock", "scissors", "paper"];
 let playerScore = 0;
@@ -17,26 +17,26 @@ function play(playerChoice) {
 
     function computerWin() {
         computerScore++;
-            display.textContent = (`Computer: ${computerChoice}`);
-            player.textContent = (`Player: ${playerChoice}`);
-            winner.textContent = ("Computer Win");
-            cS.textContent = computerScore;
+        computerResult.textContent = (`Computer: ${computerChoice}`);
+        playerResult.textContent = (`Player: ${playerChoice}`);
+        winnerResult.textContent = ("Computer Win");
+
+        computerDisplayScore.textContent = computerScore;
     }
     
     function playerWin() {
         playerScore++;
-        display.textContent = (`Computer: ${computerChoice}`);
-        player.textContent = (`Player: ${playerChoice}`);
-        winner.textContent = ("Player Win");
-        pS.textContent = playerScore;
+        computerResult.textContent = (`Computer: ${computerChoice}`);
+        playerResult.textContent = (`Player: ${playerChoice}`);
+        winnerResult.textContent = ("Player Win");
+
+        playerDisplayScore.textContent = playerScore;
     }
 
-    // Logika perbandingan dan penambahan skor
-    // Tampilkan hasil di DOM
     if(computerChoice === playerChoice){
-        winner.textContent = ("Draw");
-        display.textContent = (`Computer: ${computerChoice}`);
-        player.textContent = (`Player: ${playerChoice}`);
+        winnerResult.textContent = ("Draw");
+        computerResult.textContent = (`Computer: ${computerChoice}`);
+        playerResult.textContent = (`Player: ${playerChoice}`);
     }else if(computerChoice == "rock" && playerChoice == "scissors"){
         computerWin();
     }else if(computerChoice == "rock" && playerChoice == "paper"){
@@ -50,7 +50,7 @@ function play(playerChoice) {
     }else if (computerChoice == "paper" && playerChoice == "scissors"){
         playerWin();
     }else{
-        winner.textContent = ("Draw");
+        winnerResult.textContent = ("Draw");
     }
     
 }
