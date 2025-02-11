@@ -1,60 +1,77 @@
-const computerResult = document.querySelector("#computer-result");
-const playerResult = document.querySelector("#player-result");
-const winnerResult = document.querySelector("#winner-result");
-const playerDisplayScore = document.querySelector("#player-display-score");
-const computerDisplayScore = document.querySelector("#computer-display-score");
+document.addEventListener('DOMContentLoaded', () => {
+    const computerChoiceDisplay = document.querySelector(".computer-choice");
+    const playerChoiceDisplay = document.querySelector(".player-choice");
+    const finalResult = document.querySelector(".final-result");
+    const playerScoreDisplay = document.querySelector(".player-score .score-value");
+    const computerScoreDisplay = document.querySelector(".computer-score .score-value");
+    const buttons = document.querySelectorAll(".btn-choice");
 
-const choices = ["rock", "scissors", "paper"];
-let playerScore = 0;
-let computerScore = 0;
+    const choices = {
+        rock: {id: "rock", label: "Batu", icon: "fa-hand-rock"},
+        scissors: {id: "scissors", label: "Gunting", icon: "fa-hand-scissors"},
+        paper: {id: "paper", label: "Kertas", icon: "fa-hand-paper"}
+    };
 
-function getRandomChoice() {
-    return choices[Math.floor(Math.random() * choices.length)];
-}
+    let playerScore = 0;
+    let computerScore = 0;
 
-function play(playerChoice) {
-    const computerChoice = getRandomChoice();
-
-    function computerWin() {
-        computerScore++;
-        computerResult.textContent = (`Computer: ${computerChoice}`);
-        playerResult.textContent = (`Player: ${playerChoice}`);
-        winnerResult.textContent = ("Computer Win");
-
-        computerDisplayScore.textContent = computerScore;
-    }
-    
-    function playerWin() {
-        playerScore++;
-        computerResult.textContent = (`Computer: ${computerChoice}`);
-        playerResult.textContent = (`Player: ${playerChoice}`);
-        winnerResult.textContent = ("Player Win");
-
-        playerDisplayScore.textContent = playerScore;
+    function getComputerChoice() {
+        const keys = Object.keys(choices);
+        return choices[keys[Math.floor(Math.random() * keys.length)]];
     }
 
-    if(computerChoice === playerChoice){
-        winnerResult.textContent = ("Draw");
-        computerResult.textContent = (`Computer: ${computerChoice}`);
-        playerResult.textContent = (`Player: ${playerChoice}`);
-    }else if(computerChoice == "rock" && playerChoice == "scissors"){
-        computerWin();
-    }else if(computerChoice == "rock" && playerChoice == "paper"){
-       playerWin();
-    }else if (computerChoice == "scissors" && playerChoice == "rock"){
-        playerWin();
-    }else if (computerChoice == "scissors" && playerChoice == "paper"){
-        computerWin();
-    }else if (computerChoice == "paper" && playerChoice == "rock"){
-        computerWin();
-    }else if (computerChoice == "paper" && playerChoice == "scissors"){
-        playerWin();
-    }else{
-        winnerResult.textContent = ("Draw");
+    function updateDisplay(computerChoice, playerChoice, result) {
+        computerChoiceDisplay.innerHTML = `<i class="fas ${computerChoice.icon}"></i> ${computerChoice.label}`;
+        playerChoiceDisplay.innerHTML = `<i class="fas ${playerChoice.icon}"></i> ${playerChoice.label}`;
+        
+        playerScoreDisplay.textContent = playerScore;
+        computerScoreDisplay.textContent = computerScore;
+        
+        finalResult.textContent = result;
+        finalResult.style.color = result.includes("Menang") ? "#28a745" : "#dc3545";
     }
-    
-}
 
-document.getElementById("rock").addEventListener("click", () => play("rock"));
-document.getElementById("scissors").addEventListener("click", () => play("scissors"));
-document.getElementById("paper").addEventListener("click", () => play("paper"));
+    function determineWinner(computerChoice, playerChoice) {
+        if (computerChoice.id === playerChoice.id) {
+            return "Seri!";
+        }
+        
+        const winConditions = {
+            rock: "scissors",
+            scissors: "paper",
+            paper: "rock"
+        };
+        
+        return winConditions[playerChoice.id] === computerChoice.id 
+            ? "Player Menang!" 
+            : "Komputer Menang!";
+    }
+
+    function play(selectedChoice) {
+        const playerChoice = choices[selectedChoice];
+        
+        // Validasi pilihan player
+        if (!playerChoice) {
+            console.error("Pilihan tidak valid!");
+            return;
+        }
+        
+        const computerChoice = getComputerChoice();
+        const result = determineWinner(computerChoice, playerChoice);
+        
+        if (result === "Player Menang!") playerScore++;
+        if (result === "Komputer Menang!") computerScore++;
+        
+        updateDisplay(computerChoice, playerChoice, result);
+    }
+
+    // Event listeners
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            play(button.id);
+            finalResult.style.animation = 'none';
+            void finalResult.offsetHeight;
+            finalResult.style.animation = 'pop 0.3s ease';
+        });
+    });
+});

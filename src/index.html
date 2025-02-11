@@ -12,41 +12,64 @@
 	/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-   <div class="scoreboard container d-flex flex-column justify-content-center">
-
-    <div class="row row-cols-1 row-cols-md-2 text-center points py-5 justify-content-center" id="score">
-        <div>
-            <p id="player-display-score">0</p>
-            <h2>You</h2>
+    <div class="game-container container-fluid d-flex flex-column min-vh-100 justify-content-center align-items-center">
+        <!-- Score Board -->
+        <div class="score-board bg-light rounded-4 shadow-lg p-4 mb-5">
+            <div class="row g-4 text-center">
+                <div class="col-6">
+                    <div class="player-score">
+                        <h3 class="text-primary mb-3">You</h3>
+                        <div class="score-value display-2 fw-bold text-success">0</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="computer-score">
+                        <h3 class="text-danger mb-3">Computer</h3>
+                        <div class="score-value display-2 fw-bold text-success">0</div>
+                    </div>
+                </div>
+            </div>
         </div>
+    
+        <!-- Action Buttons -->
+        <div class="action-buttons mb-5">
+            <div class="d-flex gap-3">
+                <!-- Pastikan ID tombol sesuai dengan key di objek choices -->
+                <button class="btn-choice btn btn-lg btn-primary rounded-pill px-4 py-3 shadow-sm" id="rock">
+                    <i class="fas fa-hand-rock fa-2x"></i>
+                    <span class="d-block mt-2">Batu</span>
+                </button>
 
-        <div>
-            <p id="computer-display-score">0</p>
-            <h2>Computer</h2>
+                <button class="btn-choice btn btn-lg btn-danger rounded-pill px-4 py-3 shadow-sm" id="scissors">
+                    <i class="fas fa-hand-scissors fa-2x"></i>
+                    <span class="d-block mt-2">Gunting</span>
+                </button>
+
+                <button class="btn-choice btn btn-lg btn-warning rounded-pill px-4 py-3 shadow-sm" id="paper">
+                    <i class="fas fa-hand-paper fa-2x"></i>
+                    <span class="d-block mt-2">Kertas</span>
+                </button>
+            </div>
+        </div>
+    
+        <!-- Result Display -->
+        <div class="result-display bg-white rounded-4 shadow p-4 w-100 text-center" style="max-width: 600px;">
+            <h2 class="text-muted mb-3">Hasil Pertandingan</h2>
+            <div class="result-content">
+                <div class="computer-choice h4 text-danger mb-3"></div>
+                <div class="player-choice h4 text-primary mb-3"></div>
+                <hr class="mx-auto w-50">
+                <div class="final-result display-4 fw-bold text-success mt-3"></div>
+            </div>
         </div>
     </div>
-
-    <div class="col col-auto py-3 points d-flex align-items-center justify-content-center" type="button" id="buttons">
-        <div>
-            <button class="btn btn-primary" type="button" id="rock">Batu</button>
-        </div>
-
-        <div>
-            <button class="btn btn-primary" type="button" id="scissors">Gunting</button>
-        </div>
-
-        <div>
-            <button class="btn btn-primary" type="button" id="paper">Kertas</button>
-        </div>
-    </div>
-
-    <div class="col col-auto py-3 points d-flex flex-column align-items-center justify-content-center">
-        <h2 id="computer-result"></h2>
-        <h2 id="player-result"></h2>
-        <h2 id="winner-result"></h2>
-    </div>
+    
+    <style>
+    /* Custom CSS */
+    </style>
 
    </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

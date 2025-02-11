@@ -1,65 +1,50 @@
-body {
-    color: #fff;
-    background: #1f2937;
-    /* font-family: verdana, sans-serif; */
-}
-
-.scoreboard {
+.game-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
 }
 
-h2 {
-    text-transform: uppercase;
-    font-size: px;
-    font-weight: 800;
+.score-board {
+    width: 100%;
+    max-width: 600px;
+    border: 4px solid #fff;
 }
 
-.points p {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 400;
-    font-size: 80px;
-    background: #000;
-    color: #f94f6d;
-    min-width: 205px;
+.btn-choice {
+    transition: all 0.2s ease;
+    border: 3px solid white;
 }
 
-.btn-primary {
-    background: transparent;
-    color: #9aabd8;
-    border-color: #9aabd8;
-    font-size: 1.5em;
+.btn-choice:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.btn-primary:hover,
-.btn-primary:active {
-    color: #fff;
-    background-color: #f94f6d;
-    border-color: #f94f6d;
+.btn-choice:active {
+    transform: translateY(0);
 }
 
-.btn-check:focus+.btn-primary,
-.btn-primary:focus {
-    color: #fff;
-    background-color: #f94f6d;
-    border-color: #f94f6d;
-    box-shadow: 0 0 0 0.25rem rgb(255 255 255 / 50%);
+.result-display {
+    min-height: 200px;
 }
 
-#score {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    /* Gaya lainnya */
+.score-value {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#player-score {
-    color: blue;
-    font-size: 5em;
-
+.final-result {
+    animation: pop 0.3s ease;
 }
 
-#computer-score {
-    color: brown;
-    font-size: 5em;
-    /* Gaya lainnya */
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
