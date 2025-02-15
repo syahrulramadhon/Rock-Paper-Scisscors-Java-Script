@@ -1,3 +1,1 @@
-Hello Jemlok
-Nanda Bergabung
-eh haa lah
+website game kertas batu gunting sederhana
